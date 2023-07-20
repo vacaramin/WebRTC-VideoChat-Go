@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	server.AllRooms.Init()
+
 	http.HandleFunc("/create", server.CreateRoomRequestHandler)
 	http.HandleFunc("/join", server.JoinRoomRequestHandler)
 
