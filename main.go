@@ -3,11 +3,13 @@ package main
 import (
 	"log"
 	"net/http"
+
+	"github.com/vacaramin/WebRTC-VideoChat-Go/server"
 )
 
 func main() {
-	http.Handle("/create", CreateRoomRequestHandler)
-	http.Handle("/join", JoinRoomRequestHandler)
+	http.HandleFunc("/create", server.CreateRoomRequestHandler)
+	http.HandleFunc("/join", server.JoinRoomRequestHandler)
 
 	log.Println("Server started on Port 8080")
 	err := http.ListenAndServe(":8080", nil)
