@@ -1,7 +1,9 @@
 package server
 
 import (
+	"math/rand"
 	"sync"
+	"time"
 
 	"github.com/gorilla/websocket"
 )
@@ -36,7 +38,15 @@ func (r *RoomMap) CreateRoom() string {
 	// generate a Unique ID
 	r.Mutex.Lock()
 	defer r.Mutex.Unlock()
-
+	rand.Seed(time.Now().UnixNano())
+	var letters = []rune("abcdefghijklmnopqrstuvwxyz1234567890")
+	temp := make([]rune, 8)
+	for i := range temp {
+		temp[i] := letters[rand.Intn(len(letters))]
+	}
+	roomID := string(b)
+	r.Map[roomID] = []Participant{}
+	return roomID
 }
 
 func (r *RoomMap) DeleteRoom() {
