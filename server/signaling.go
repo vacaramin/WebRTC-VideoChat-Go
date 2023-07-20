@@ -12,6 +12,7 @@ var AllRooms RoomMap
 
 // CreateRoomRequestHandler Create a Room and return Room ID
 func CreateRoomRequestHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	roomID := AllRooms.CreateRoom()
 	type resp struct {
 		RoomID string `json:"room_id"`
@@ -50,6 +51,7 @@ func broadcaster() {
 
 // JoinRoomRequest Handler Will join the client in a particular room
 func JoinRoomRequestHandler(w http.ResponseWriter, r *http.Request) {
+
 	roomID, ok := r.URL.Query()["roomID"]
 	if !ok {
 		log.Printf("roomID MISSING in URL")
